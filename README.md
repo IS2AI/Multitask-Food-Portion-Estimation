@@ -108,7 +108,7 @@ This project is based on [ultralytics/ultralytics](https://github.com/ultralytic
 
 ## Citation
 
-Please also cite our work if you use the FoodWeight model. (Citation will be added after publication.)
+Please cite our work if you use the Multi-task model. (Citation will be added after publication.)
 
 ```BibTeX
 @article{,
