@@ -4,8 +4,8 @@
 <h3>Multi-Task Real-Time Food Detection and Weight Estimation</h3>
 
 <p align="center">
-  <img src="assets/model.png" width=90%><br>
-  <em>Proposed YOLOv12-FoodWeight architecture with an additional regression head for food weight prediction</em>
+  <img src="assets/model.png" width=100%><br>
+  <em>Proposed Multi-task food detection and weight estimation model based YOLOv12 architecture.</em>
 </p>
 
 </div>
@@ -21,22 +21,37 @@ This project builds upon the YOLOv12 architecture to perform **multi-task learni
 
 We introduce an additional regression head to YOLOv12 to predict weights, enabling simultaneous localization and portion estimation from a single image.
 
-Our model is trained and evaluated on a specialized food dataset with annotated bounding boxes and weight labels in grams, available on Hugging Face:
-
-➡️ [Download FoodWeight Dataset on Hugging Face](https://huggingface.co/datasets/your-dataset-link)
 
 ## Main Features
 
 - **Multi-task** Food object detection and weight (in grams) prediction.
-- **Single unified model**: Jointly trained for classification, localization, and regression.
-- **Flexible prediction outputs**: Save predictions in `.txt` or `.csv` formats.
+- **Single unified model**: Jointly trained for classification, localization, and regression tasks.
 - **Evaluation metrics**: Includes MAE (Mean Absolute Error) for weight estimation.
+
+
+## Dataset Format
+
+Our model is trained and evaluated on a specialized food dataset with annotated bounding boxes and weight labels in grams, available on Hugging Face:
+
+➡️ [Download Food Portion Benchmark Dataset on Hugging Face](https://huggingface.co/datasets/your-dataset-link)
+
+Each image has an associated `.txt` label file containing six columns:
+
+- `class_id` (integer): ID of the food class.
+- `x_center` (float): Normalized x center of bounding box (0 to 1).
+- `y_center` (float): Normalized y center of bounding box (0 to 1).
+- `width` (float): Normalized width of bounding box (0 to 1).
+- `height` (float): Normalized height of bounding box (0 to 1).
+- `weight` (float): Ground truth weight of the food item in grams.
+
+This extended label format enables simultaneous object detection and weight regression.
+
 
 
 ## Results
 
 <p align="center">
-  <img src="assets/training_results.png" width=80%><br>
+  <img src="assets/training_results.png" width=100%><br>
   <em>Training results comparing the different versions of the YOLOv8 and YOLOv12 models</em>
 </p>
 
@@ -65,34 +80,17 @@ pip install flash_attn-2.7.3+cu11torch2.2cxx11abiFALSE-cp311-cp311-linux_x86_64.
 
 ## Training
 
-Train the multi-task model from scratch or fine-tune a pretrained YOLOv12 model.
+Training is handled through the `train.py` script. This script loads the modified YOLOv12 model configuration, prepares the dataset, and launches the training process.
 
-```python
-from ultralytics import YOLO
-
-model = YOLO('yolov12m.yaml')  
-
-results = model.train(
-    data='data.yaml',
-    task='detect', 
-    epochs=200, 
-    imgsz=640, 
-    batch=8, 
-    device="cuda:0"
-)
-```
+- You can train the model from scratch or fine-tune a pretrained YOLOv12 checkpoint.
+- The model is trained to perform both object detection and weight regression tasks simultaneously.
+- The training outputs include model checkpoints, loss curves, and metric evaluations over epochs.
 
 
+## Testing and Prediction
 
-Outputs:
-- Standard detection metrics (mAP, precision, recall)
-- MAE for weight estimation
-- Optionally, annotated images with predicted bounding boxes and weights
-
-## Prediction
-
-We provide two scripts to generate predictions:
-
+We provide few scripts to generate predictions:
+- **`test.py`**: Runs inference, calculates regression MAE metric for weight prediction, and optionally save annotated images showing detection and predicted weights.
 - **`predict_txt.py`**: Runs inference and saves the predictions in a `.txt` format.
 - **`predict_csv.py`**: Runs inference and saves the predictions in a `.csv` format.
 
