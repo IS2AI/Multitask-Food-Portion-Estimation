@@ -42,6 +42,7 @@ from .utils import (
 DATASET_CACHE_VERSION = "1.0.3"
 
 
+
 class YOLODataset(BaseDataset):
     """
     Dataset class for loading object detection and/or segmentation labels in YOLO format.
@@ -179,34 +180,27 @@ class YOLODataset(BaseDataset):
             hyp.mosaic = hyp.mosaic if self.augment and not self.rect else 0.0
             hyp.mixup = hyp.mixup if self.augment and not self.rect else 0.0
             transforms = v8_transforms(self, self.imgsz, hyp)
+            
             transforms.append(
-                Format(
-                    bbox_format="xywh",
+                Format(bbox_format='xywh',
                     normalize=True,
                     return_mask=self.use_segments,
                     return_keypoint=self.use_keypoints,
-                    #return_obb=self.use_obb,
-                    return_obb=False,
                     batch_idx=True,
                     mask_ratio=hyp.mask_ratio,
-                    mask_overlap=hyp.overlap_mask,
-                    bgr=hyp.bgr if self.augment else 0.0,  # only affect training.
+                    mask_overlap=hyp.overlap_mask
                 )
             )
         else:
             transforms = Compose([LetterBox(new_shape=(self.imgsz, self.imgsz), scaleup=False)])
             transforms.append(
-                Format(
-                    bbox_format="xywh",
+                Format(bbox_format='xywh',
                     normalize=True,
                     return_mask=self.use_segments,
                     return_keypoint=self.use_keypoints,
-                    #return_obb=self.use_obb,
-                    return_obb=False,
                     batch_idx=True,
                     mask_ratio=hyp.mask_ratio,
-                    mask_overlap=hyp.overlap_mask,
-                    bgr=hyp.bgr if self.augment else 0.0,  # only affect training.
+                    mask_overlap=hyp.overlap_mask
                 )
             )
         return transforms
@@ -267,6 +261,9 @@ class YOLODataset(BaseDataset):
                 if len(filtered_value) == 0:
                     raise ValueError(f"No valid tensors with size[1] == 5 for key '{k}'.")
                 value = torch.cat(filtered_value, 0)    
+                #print(f"[COLLATE] Batched bboxes shape: {value.shape}")
+                #print("  Sample weights (value[:, 4]):", value[:, 4][:10])  # First 10 weights
+
             new_batch[k] = value
         new_batch['batch_idx'] = list(new_batch['batch_idx'])
         for i in range(len(new_batch['batch_idx'])):

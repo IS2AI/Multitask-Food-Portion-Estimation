@@ -33,7 +33,7 @@ We introduce an additional regression head to YOLOv12 to predict weights, enabli
 
 Our model is trained and evaluated on a specialized food dataset with annotated bounding boxes and weight labels in grams, available on Hugging Face:
 
-➡️ [Download Food Portion Benchmark Dataset on Hugging Face](https://huggingface.co/datasets/your-dataset-link)
+➡️ [Download Food Portion Benchmark Dataset on Hugging Face](https://huggingface.co/datasets/issai/Food_Portion_Benchmark)
 
 Each image has an associated `.txt` label file containing six columns:
 
@@ -60,7 +60,7 @@ This extended label format enables simultaneous object detection and weight regr
 
 You can download the best-performing pretrained YOLOv12-M model weights here:
 
-- [YOLOv12-FoodWeight Medium (best checkpoint)](https://huggingface.co/your-model-link-small)
+- [YOLOv12-FoodWeight Medium (best checkpoint)](https://huggingface.co/your-model-link)
 
 
 ## Installation
@@ -90,9 +90,10 @@ Training is handled through the `train.py` script. This script loads the modifie
 ## Testing and Prediction
 
 We provide few scripts to generate predictions:
-- **`test.py`**: Runs inference, calculates regression MAE metric for weight prediction, and optionally save annotated images showing detection and predicted weights.
+- **`calculate_weight_MAE.py`**: Runs inference, calculates regression MAE metric for weight prediction, and optionally save annotated images showing detection and predicted weights.
 - **`predict_txt.py`**: Runs inference and saves the predictions in a `.txt` format.
 - **`predict_csv.py`**: Runs inference and saves the predictions in a `.csv` format.
+- **`YOLOv8_version_code`**: Includes code for the YOLOv8 version of this project, as described in the paper.
 
 Each prediction contains:
 - `image_name`, `class_id`, `xmin`, `ymin`, `xmax`, `ymax`, `weight`, `confidence`
