@@ -113,9 +113,9 @@ Please cite our work if you use the Multi-task model. (Citation will be added af
 
 ```BibTeX
 @article{,
-  title={},
-  author={},
-  journal={},
+  title={A Multitask Deep Learning Model for Food Scene Recognition and Portion Estimation—the Food Portion Benchmark (FPB) Dataset}, 
+  author={Sanatbyek, Aibota and Rakhimzhanova, Tomiris and Nurmanova, Bibinur and Omarova, Zhuldyz and Rakhmankulova, Aidana and Orazbayev, Rustem and Varol, Huseyin Atakan and Chan, Mei Yen},
+  journal={IEEE Access}, 
   year={2025}
 }
 ```
