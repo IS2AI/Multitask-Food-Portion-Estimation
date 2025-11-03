@@ -58,9 +58,9 @@ This extended label format enables simultaneous object detection and weight regr
 
 ## Pretrained Weights
 
-You can download the best-performing pretrained YOLOv12-M model weights here:
+You can download the best-performing pretrained YOLO model weights here:
 
-- [YOLOv12-FoodWeight Medium (best checkpoint)](https://huggingface.co/your-model-link)
+- [YOLO-FoodWeight (best checkpoints)](https://drive.google.com/drive/folders/1XbgdXzfX73PxUUxthcbcqbY-1TNRK51d?usp=sharing)
 
 
 ## Installation
