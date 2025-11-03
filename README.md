@@ -112,10 +112,13 @@ This project is based on [ultralytics/ultralytics](https://github.com/ultralytic
 Please cite our work if you use the Multi-task model. (Citation will be added after publication.)
 
 ```BibTeX
-@article{,
-  title={A Multitask Deep Learning Model for Food Scene Recognition and Portion Estimation—the Food Portion Benchmark (FPB) Dataset}, 
-  author={Sanatbyek, Aibota and Rakhimzhanova, Tomiris and Nurmanova, Bibinur and Omarova, Zhuldyz and Rakhmankulova, Aidana and Orazbayev, Rustem and Varol, Huseyin Atakan and Chan, Mei Yen},
-  journal={IEEE Access}, 
-  year={2025}
+@article{Sanatbyek_2025,
+    title={A multitask deep learning model for food scene recognition and portion estimation—the Food Portion Benchmark (FPB) dataset}, 
+    volume={13}, 
+    DOI={10.1109/access.2025.3603287}, 
+    journal={IEEE Access}, 
+    author={Sanatbyek, Aibota and Rakhimzhanova, Tomiris and Nurmanova, Bibinur and Omarova, Zhuldyz and Rakhmankulova, Aidana and Orazbayev, Rustem and Varol, Huseyin Atakan and Chan, Mei Yen}, 
+    year={2025}, 
+    pages={152033–152045}
 }
 ```
